@@ -1,0 +1,3 @@
+theme = tokyonight
+gtk-titlebar = false
+title = " "
