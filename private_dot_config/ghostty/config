@@ -8,5 +8,9 @@ window-width = 165
 window-height = 40
 window-padding-balance = true
 
+# Cursor
+cursor-style = block
+shell-integration-features = no-cursor
+
 # Fonts
 font-size = 14
