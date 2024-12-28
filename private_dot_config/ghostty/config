@@ -1,3 +1,12 @@
+# Theme
 theme = tokyonight
-gtk-titlebar = false
-title = " "
+
+# Window
+window-padding-x = 0
+window-padding-y = 0
+window-width = 165
+window-height = 40
+window-padding-balance = true
+
+# Fonts
+font-size = 14
