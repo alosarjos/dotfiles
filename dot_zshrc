@@ -27,6 +27,7 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::eza
 zinit snippet OMZP::taskwarrior
 zinit snippet OMZP::command-not-found
+ZSH_CACHE_DIR="$HOME/.local/share/zinit" zinit snippet OMZP::mise
 ZOXIDE_CMD_OVERRIDE=cd zinit snippet OMZP::zoxide
 
 # Load completions
