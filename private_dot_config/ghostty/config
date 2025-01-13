@@ -1,6 +1,9 @@
 # Theme
 theme = tokyonight_moon
 
+#GTK
+gtk-titlebar=false
+
 # Window
 window-padding-x = 0
 window-padding-y = 0
