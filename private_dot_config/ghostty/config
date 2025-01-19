@@ -19,4 +19,4 @@ cursor-style = block
 shell-integration-features = no-cursor
 
 # Fonts
-font-size = 14
+font-size = 13
