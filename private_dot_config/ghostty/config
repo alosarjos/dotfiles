@@ -1,8 +1,8 @@
 # Theme
 theme = tokyonight_moon
 
-#GTK
-gtk-titlebar=false
+# GTK
+gtk-titlebar-hide-when-maximized = true
 
 # Window
 window-padding-x = 0
