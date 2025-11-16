@@ -1,0 +1,15 @@
+# Theme
+theme = TokyoNight Moon
+
+# Shell integration
+shell-integration = fish
+
+# Cursor
+cursor-style = block
+shell-integration-features = no-cursor
+
+# Fonts
+font-family = Adwaita Mono
+
+# Window
+window-padding-balance = true
