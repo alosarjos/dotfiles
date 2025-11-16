@@ -1,0 +1,41 @@
+[user]
+	name = José Miguel Sarasola
+	email = alosarjos@gmail.com
+	signingkey = alosarjos@gmail.com
+[pull]
+	rebase = true
+[core]
+	editor = nvim
+[rerere]
+	enabled = true
+	autoupdate = true
+[commit]
+	gpgsign = true
+	verbose = true
+[init]
+	defaultBranch = master
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[merge]
+	conflictstyle = zdiff3 
