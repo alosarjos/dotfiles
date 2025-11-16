@@ -9,6 +9,9 @@ cursor-style = block
 shell-integration-features = no-cursor
 
 # Fonts
+{{- if hasKey . "terminal_font_size" }}
+font-size = {{ .terminal_font_size }}
+{{- end }}
 font-family = Adwaita Mono
 
 # Window
