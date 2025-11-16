@@ -1,0 +1,5 @@
+# Check if bash is being called as top level process, not running a specific comamnd  and there is no parent shell using fish
+if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && ${SHLVL} == 1 && ${TERM} != "linux" ]]; then
+	shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=''
+	exec fish $LOGIN_OPTION
+fi
