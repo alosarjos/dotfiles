@@ -16,3 +16,9 @@ font-family = Adwaita Mono
 
 # Window
 window-padding-balance = true
+{{- if hasKey . "terminal_window_height" }}
+window-height = {{ .terminal_window_height }}
+{{- end }}
+{{- if hasKey . "terminal_window_width" }}
+window-width = {{ .terminal_window_width }}
+{{- end }}
