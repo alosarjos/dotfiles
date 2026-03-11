@@ -1,0 +1,1 @@
+bind alt-l __fish_list_current_token_eza
