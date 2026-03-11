@@ -1,17 +1,9 @@
-//
-/* You may copy+paste this file and use it as it is.
- *
- * If you make changes to your about:config while the program is running, the
- * changes will be overwritten by the user.js when the application restarts.
- *
- * To make lasting changes to preferences, you will have to edit the user.js.
- */
-
 /****************************************************************************
  * Betterfox                                                                *
  * "Ad meliora"                                                             *
- * version: 144                                                             *
+ * version: 144 (base) / revisado para Firefox 148                         *
  * url: https://github.com/yokoffing/Betterfox                              *
+ * adaptado para: Linux / GNOME / Wayland / AMD RX 7800 XT                 *
 ****************************************************************************/
 
 /****************************************************************************
@@ -20,25 +12,42 @@
 /** GENERAL ***/
 user_pref("gfx.content.skia-font-cache-size", 32);
 
+/** UI RENDERING - INSTANT PAINT ***/
+user_pref("nglayout.initialpaint.delay", 0);
+user_pref("nglayout.initialpaint.delay_in_oopif", 0);
+user_pref("content.notify.interval", 100000);
+
 /** GFX ***/
 user_pref("gfx.canvas.accelerated.cache-items", 32768);
 user_pref("gfx.canvas.accelerated.cache-size", 4096);
 user_pref("webgl.max-size", 16384);
 
-/** DISK CACHE ***/
-user_pref("browser.cache.disk.enable", false);
+/** WEBRENDER - GPU AMD (Wayland) ***/
+// Fuerza WebRender hardware en AMD/Linux
+user_pref("gfx.webrender.all", true);
+// Precache de shaders: reduce micro-stutters en la primera carga
+user_pref("gfx.webrender.precache-shaders", true);
+// Proceso GPU separado: mejor estabilidad y rendimiento con AMD
+user_pref("layers.gpu-process.enabled", true);
+user_pref("layers.gpu-process.force-enabled", true);
+
+/** DISK CACHE en tmpfs ***/
+user_pref("browser.cache.disk.enable", true);
+user_pref("browser.cache.disk.parent_directory", "/run/user/1000/firefox");
+// 512 MB en tmpfs
+user_pref("browser.cache.disk.capacity", 524288);
 
 /** MEMORY CACHE ***/
-user_pref("browser.cache.memory.capacity", 131072);
+user_pref("browser.cache.memory.capacity", 262144);
 user_pref("browser.cache.memory.max_entry_size", 20480);
 user_pref("browser.sessionhistory.max_total_viewers", 4);
 user_pref("browser.sessionstore.max_tabs_undo", 10);
 
-/** MEDIA CACHE ***/
-user_pref("media.memory_cache_max_size", 262144);
-user_pref("media.memory_caches_combined_limit_kb", 1048576);
-user_pref("media.cache_readahead_limit", 600);
-user_pref("media.cache_resume_threshold", 300);
+/** MEDIA CACHE - VIDEO (YouTube/Streaming) ***/
+user_pref("media.memory_cache_max_size", 393216);
+user_pref("media.memory_caches_combined_limit_kb", 786432);
+user_pref("media.cache_readahead_limit", 7000);
+user_pref("media.cache_resume_threshold", 3000);
 
 /** IMAGE CACHE ***/
 user_pref("image.cache.size", 10485760);
@@ -63,6 +72,23 @@ user_pref("browser.places.speculativeConnect.enabled", false);
 user_pref("network.prefetch-next", false);
 user_pref("network.predictor.enabled", false);
 
+/** PROCESS MANAGEMENT ***/
+user_pref("dom.ipc.forkserver.enable", true);
+
+/** GARBAGE COLLECTION ***/
+user_pref("javascript.options.mem.gc_threshold", 16384);
+user_pref("javascript.options.mem.high_water_mark", 128);
+user_pref("javascript.options.mem.max", 1048576);
+
+/** MEMORY MANAGEMENT ***/
+user_pref("browser.tabs.unloadOnLowMemory", true);
+user_pref("browser.tabs.min_inactive_duration_before_unload", 600000);
+
+/****************************************************************************
+ * HARDWARE VIDEO DECODING — VA-API (AMD RX 7800 XT)                       *
+****************************************************************************/
+user_pref("widget.dmabuf.force-enabled", true);
+
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
 ****************************************************************************/
@@ -74,8 +100,9 @@ user_pref("browser.helperApps.deleteTempFileOnExit", true);
 user_pref("browser.uitour.enabled", false);
 user_pref("privacy.globalprivacycontrol.enabled", true);
 
-/** OCSP & CERTS / HPKP ***/
-user_pref("security.OCSP.enabled", 0);
+/** OCSP & CERTS ***/
+user_pref("security.OCSP.enabled", 1);
+user_pref("security.OCSP.require", false);
 user_pref("security.csp.reporting.enabled", false);
 
 /** SSL / TLS ***/
@@ -179,14 +206,14 @@ user_pref("browser.profiles.enabled", true);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("browser.compactmode.show", true);
 
-/** AI ***/
+/** AI (desactivado) ***/
 user_pref("browser.ml.enable", false);
 user_pref("browser.ml.chat.enabled", false);
 user_pref("browser.ml.chat.menu", false);
 user_pref("browser.tabs.groups.smart.enabled", false);
 user_pref("browser.ml.linkPreview.enabled", false);
 
-/** FULLSCREEN NOTICE ***/
+/** FULLSCREEN ***/
 user_pref("full-screen-api.transition-duration.enter", "0 0");
 user_pref("full-screen-api.transition-duration.leave", "0 0");
 user_pref("full-screen-api.warning.timeout", 0);
@@ -216,10 +243,6 @@ user_pref("layout.word_select.eat_space_to_next_word", false);
 /****************************************************************************
  * START: MY OVERRIDES                                                      *
 ****************************************************************************/
-// visit https://github.com/yokoffing/Betterfox/wiki/Common-Overrides
-// visit https://github.com/yokoffing/Betterfox/wiki/Optional-Hardening
-// Enter your personal overrides below this line:
-
 /** TRANSLATIONS POPUP ***/
 user_pref("browser.translations.automaticallyPopup", false);
 
@@ -227,9 +250,5 @@ user_pref("browser.translations.automaticallyPopup", false);
 user_pref("browser.tabs.loadBookmarksInBackground", true);
 user_pref("browser.download.useDownloadDir", true);
 
-/** LINUX SPECIFIC ***/
-// Rounded bottom corners
+/** LINUX / GNOME / WAYLAND ***/
 // user_pref("widget.gtk.rounded-bottom-corners.enabled", true);
-
-// Cache en RAM (mantener tu config)
-user_pref("browser.cache.disk.parent_directory", "/run/user/1000/firefox");
