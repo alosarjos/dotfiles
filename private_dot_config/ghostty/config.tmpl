@@ -1,14 +1,6 @@
 # Theme
 theme = TokyoNight Moon
 
-# Shell integration
-shell-integration = fish
-
-# Cursor
-cursor-style = block
-shell-integration-features = no-cursor
-cursor-style-blink = true
-
 # Fonts
 {{- if hasKey . "terminal_font_size" }}
 font-size = {{ .terminal_font_size }}
@@ -16,7 +8,6 @@ font-size = {{ .terminal_font_size }}
 font-family = Adwaita Mono
 
 # Window
-window-padding-balance = true
 {{- if hasKey . "terminal_window_height" }}
 window-height = {{ .terminal_window_height }}
 {{- end }}
